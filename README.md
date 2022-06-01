@@ -28,7 +28,7 @@ References to chapters, sections, and subsections should follow this schema:
 | subsection    | Section           | [...] in Section 1.1.1    |
 | subsubsection | Section           | [...] in Section 1.1.1.1  |
 
-Please avoid using `subsubsection` if not strictly necessary.
+*Note*: Please avoid using `subsubsection` if not strictly necessary.
 
 #### Numbering
 
@@ -39,22 +39,22 @@ Figures, Tables, Listings, should always be numbered per *chapter*.
 
 #### Using \autoref{}
 
-You can use the command `\autoref{}` instead of writing `in Chapter \ref{chap:introduction}` or `in Section \ref{sec:example}`
+You can use the command `\autoref{chap:introduction}` instead of writing `in Chapter \ref{chap:introduction}`.
 This command can automatically detect which logical structure is referencing an creates the reference accordingly.
 
 Autoref needs to be configures, i.e.:
 
 ```latex
-\addto\captionsenglish{%
-  \def\chaptername{Chapter}%
-  \def\sectionname{Section}%
-  \def\subsectionname{Section}%
+\addto\captionsenglish{
+  \def\chaptername{Chapter}
+  \def\sectionname{Section}
+  \def\subsectionname{Section}
 }
 
 \addto\extrasenglish{%
-  \def\chapterautorefname{Chapter}%
-  \def\sectionautorefname{Section}%
-  \def\subsectionautorefname{Section}%
+  \def\chapterautorefname{Chapter}
+  \def\sectionautorefname{Section}
+  \def\subsectionautorefname{Section}
 }
 ```
 
@@ -62,9 +62,9 @@ Autoref needs to be configures, i.e.:
 
 #### Acronyms
 
-The first time an acronym occours write the extended name followed by the acronym in parenthesis, e.g. `Organizzazione delle Nazioni Unite (ONU)`. In the rest of the document you will write the acronym.
+The first time an acronym occours write the extended name followed by the acronym in parenthesis, e.g., `Organizzazione delle Nazioni Unite (ONU)`. In the rest of the document you will write the acronym.
 
-*Note*: the abstract is not part of the main body of your document. If an acronym appears in the abstract, the first time it appears your should write it in its extended form. Then in the main body of your document you will repeat this process.
+*Note*: the abstract is not part of the main body of your document. If an acronym appears in the abstract, the first time it appears your should write it in its extended form. Then in the body of your document you will repeat this process.
 
 #### Abstract
 
@@ -78,7 +78,7 @@ Avoid using `\textbf{}` (**bold**) if you need to emphatize a word. You should u
 
 #### Terms in another language
 
-Use `\textit{}` (*italics*) for foreigner terms, e.g., `My kid is going to \textit{scuola media}`.
+Use `\textit{}` (*italics*) for foreign terms, e.g., `My kid is going to \textit{scuola media}`.
 
 Do not use `\textit{}` (*italics*) for terms commonly used in english, e.g., `I have a dejà vu`.
 
@@ -89,18 +89,18 @@ All citations must be followed by a reference to the corresponding source (i.e.,
 
 #### Quotations
 
-Short quotations (1-2 lines), should be integrates in the text with quotes, e.g.:
+Short quotations (1-2 lines) should be integrated in the text with quotes, e.g.:
 
 ```latex
-Gallidabino et al. defines this guideline as ``very long and hopefully useful'' \cite{gallidabino2022}.
+Gallidabino et al. define this guideline as ``very long and hopefully useful''~\cite{gallidabino2022}.
 ```
 
-Long quotations (2+ lines), should define their own quotation environment, e.g.:
+Long quotations (2+ lines) should define their own quotation environment, e.g.:
 
 ```latex
 \usepackage{csquotes}
 
-Andrea Gallidabino et al. claimed in his thesis \cite{gallidabino2020}:
+Andrea Gallidabino claimed in his thesis~\cite{gallidabino2020}:
 \begin{displayquote}
 [...]
 \end{displayquote}
@@ -108,12 +108,16 @@ Andrea Gallidabino et al. claimed in his thesis \cite{gallidabino2020}:
 
 ### Figures and Floats
 
-Avoid using the float `h` (i.e., `here`).
-You are ncouraged to used floats `t` (i.e., `top`) and if necessary `b` (i.e., `bottom`).
+All figures should be referenced in your thesis. Avoid referencing figures without referencing them, e.g.:
+```latex
+In the next figure you will see a platypus.
+```
+A good way for referencing the same figure is:
+```latex
+In \autoref{fig:platypus} we show a platypus.
+```
 
-You should add your `figure` environment *immidiately after* the paragraph that references it. Latex layouting will internally decide a *good* place to insert your figure. You can override Latex decision by prefixing the float with a bang `!` (e.g., `!t`, `!b`).
-
-If your figure is displayed on a page you do not expect check the *Tricks* section.
+You should add your `figure` environment *immediately after* the paragraph that references it. Latex layouting will internally decide a *good* place to insert your figure. You can override Latex decision by prefixing the float with a bang `!` (e.g., `!t`, `!b`).
 
 ```latex
 \begin{figure}[t]                        
@@ -122,18 +126,20 @@ If your figure is displayed on a page you do not expect check the *Tricks* secti
 \end{figure}
 ```
 
+If your figure is displayed on a page you do not expect check the *Tricks* section.
+
 ### Captions and References
 
-  The captions of `Tables` and `Listings` should be included on top.
+  Be consistent with the captions of your figures and tables. Either you put them all at the top or at the bottom.
   
-  Captions of Figures and other logical stuctures should be included on the bottom.
+  **Note**: Some editors/publishers follow different conventions
 
   - Figures:
     ```latex
     \begin{figure}[t]                         
       \centering                              
       \includegraphics[width=\linewidth]{}    
-      \caption{}                              % Caption goes after 'includegraphics'
+      \caption{}
       \label{fig:}                            % Prefix your label with 'fig:'
     \end{figure}
     ```
@@ -169,11 +175,11 @@ If your figure is displayed on a page you do not expect check the *Tricks* secti
   - Tables:
 
     ```latex
-    \begin{table}[t]                            % Avoid using float 'h' (here), you are encouraged to use 't' (top) or 'b' (bottom)
-      \caption{}                                % Caption goes before 'tabular' environment
-      \label{tab:}                              % Prefix your label with 'tab:' 
+    \begin{table}[t]                        
       \begin{tabular}{}
-      \end{tabular}
+      \end{tabular}      
+      \caption{}                               
+      \label{tab:}                              % Prefix your label with 'tab:' 
     \end{table}
     ```
     
@@ -191,7 +197,7 @@ In this case all subsequent floats are moved at the end of your document.
   - Set the width of the float to \textwidth
   - Set the height of the float to \textheight
 
-**Floats do not appear on the page I reference them, but some page later**
+### Floats do not appear on the page I reference them, but it appears some pages later
 
 *Possible problem*:
 
